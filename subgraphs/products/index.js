@@ -33,7 +33,7 @@ try {
   });
 
   startStandaloneServer(server, { listen: { port: 4002 } }).then(({ url }) => {
-    console.log(`Products SubGraph running at ${url}`);
+    console.log(`🚀 Products SubGraph running at ${url}`);
   });
 } catch (error) {
   console.error("Error starting subgraph:", error);

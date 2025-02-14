@@ -31,5 +31,5 @@ const server = new ApolloServer({
 });
 
 startStandaloneServer(server, { listen: { port: 4001 } }).then(({ url }) => {
-  console.log(`Users SubGraph running at ${url}`);
+  console.log(`🚀 Users SubGraph running at ${url}`);
 });

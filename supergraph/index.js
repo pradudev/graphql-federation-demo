@@ -16,5 +16,5 @@ const gateway = new ApolloGateway({
 const server = new ApolloServer({ gateway });
 
 startStandaloneServer(server, { listen: { port: 4000 } }).then(({ url }) => {
-  console.log(`SuperGraph Gateway running at ${url}`);
+  console.log(`🚀 SuperGraph Gateway running at ${url}`);
 });
