@@ -1,0 +1,14 @@
+supergraph:
+  listen: 0.0.0.0:4000
+  introspection: true
+
+telemetry:
+  instrumentation:
+    spans:
+      mode: spec_compliant
+
+headers:
+  all:
+    request:
+      - propagate:
+          matching: .*

@@ -7,12 +7,11 @@ import { getCurrentModulePath } from '../../utils.js';
 import { gql } from 'graphql-tag'
 
 try {
+  console.log(process.env.NODE_ENV);
   const schemaPath = path.join(getCurrentModulePath(import.meta.url), 'schema.graphql');
-  console.log(`Loading schema from: ${schemaPath}`);
+  console.log(`Loading schema from ${schemaPath}`);
 
   const typeDefs = readFileSync(schemaPath, 'utf8');
-  console.log(typeDefs);
-
 
   const products = [
     { id: "101", name: "Laptop", price: 999.99 },
@@ -29,10 +28,13 @@ try {
   const schema = buildSubgraphSchema([{ typeDefs: gql(typeDefs), resolvers }]);
   const server = new ApolloServer({
     schema: schema,
-    introspection: true
+    // introspection: process.env.NODE_ENV !== 'production',
+    // hideSchemaDetailsFromClientErrors: process.env.NODE_ENV === 'production',
+    // includeStacktraceInErrorResponses: process.env.NODE_ENV !== 'production',
+    nodeEnv: 'production'
   });
 
-  startStandaloneServer(server, { listen: { port: 4002 } }).then(({ url }) => {
+  startStandaloneServer(server, { listen: { host: '0.0.0.0', port: 4002 } }).then(({ url }) => {
     console.log(`🚀 Products SubGraph running at ${url}`);
   });
 } catch (error) {
