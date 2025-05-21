@@ -20,5 +20,8 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "graphql-tag": "^2.12.6"
+  },
+  "devDependencies": {
+    "@apollo/generate-persisted-query-manifest": "^1.2.2"
   }
 }

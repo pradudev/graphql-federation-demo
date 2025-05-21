@@ -1,0 +1,10 @@
+{
+  "documents": [
+    "subgraphs/**/*.{graphql,gql,js,jsx,ts,tsx}",
+    "!**/*.d.ts",
+    "!**/*.spec.{js,jsx,ts,tsx}",
+    "!**/*.story.{js,jsx,ts,tsx}",
+    "!**/*.test.{js,jsx,ts,tsx}"
+  ],
+  "output": "persisted-query-manifest.json"
+}

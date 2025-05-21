@@ -2,13 +2,25 @@ supergraph:
   listen: 0.0.0.0:4000
   introspection: true
 
-telemetry:
-  instrumentation:
-    spans:
-      mode: spec_compliant
+homepage:
+  enabled: false
 
-headers:
-  all:
-    request:
-      - propagate:
-          matching: .*
+sandbox:
+  enabled: true
+
+include_subgraph_errors:
+  all: true
+
+persisted_queries:
+  enabled: true
+
+# telemetry:
+#   instrumentation:
+#     spans:
+#       mode: spec_compliant
+
+# headers:
+#   all:
+#     request:
+#       - propagate:
+#           matching: .*

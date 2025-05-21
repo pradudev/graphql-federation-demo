@@ -1,0 +1,24 @@
+{
+  "format": "apollo-persisted-query-manifest",
+  "version": 1,
+  "operations": [
+    {
+      "id": "79f35b2d002c83e43849aa7910d18871b6f3514a94f2fdf3b35d9800618ce66d",
+      "name": "GetProduct",
+      "type": "query",
+      "body": "query GetProduct($id: ID!) {\n  product(id: $id) {\n    id\n    name\n    price\n    __typename\n  }\n}"
+    },
+    {
+      "id": "6a0f43abc930de3ff5ad0fac2afbfefc04f8169273d0767896c9caa4c011c31b",
+      "name": "GetProducts",
+      "type": "query",
+      "body": "query GetProducts {\n  products {\n    id\n    name\n    price\n    __typename\n  }\n}"
+    },
+    {
+      "id": "58be248ff9f6be6e84396989922f148143401db8bd0124af045cd75c25567a73",
+      "name": "GetUsers",
+      "type": "query",
+      "body": "query GetUsers {\n  users {\n    id\n    name\n    email\n    __typename\n  }\n}"
+    }
+  ]
+}

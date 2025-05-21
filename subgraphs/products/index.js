@@ -28,10 +28,11 @@ try {
   const schema = buildSubgraphSchema([{ typeDefs: gql(typeDefs), resolvers }]);
   const server = new ApolloServer({
     schema: schema,
+    introspection: true,
     // introspection: process.env.NODE_ENV !== 'production',
     // hideSchemaDetailsFromClientErrors: process.env.NODE_ENV === 'production',
     // includeStacktraceInErrorResponses: process.env.NODE_ENV !== 'production',
-    nodeEnv: 'production'
+    //nodeEnv: 'production'
   });
 
   startStandaloneServer(server, { listen: { host: '0.0.0.0', port: 4002 } }).then(({ url }) => {

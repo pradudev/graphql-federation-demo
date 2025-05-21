@@ -30,11 +30,11 @@ rover dev \
 * Run router as a docker conatiner
 ```
 docker run -p 4000:4000 \
-  --env APOLLO_GRAPH_REF="Demo-re2ivc" \
-  --env APOLLO_KEY="service:Demo-re2ivc:cBffqR-UyaftqHeSpLX5ow" \
+  --env APOLLO_GRAPH_REF="BigW-POC@current" \
+  --env APOLLO_KEY="service:BigW-POC:V89xsGoDG98gJtD7W91-Kg" \
   --mount "type=bind,source=/Users/prado/personal/projects/graphql-federation-demo/router-config.yaml,target=/dist/config/router.yaml" \
   --rm \
-  ghcr.io/apollographql/router:v2.0.0
+  ghcr.io/apollographql/router:v2.1.1
 ```
 
 # Publish subgraphs to Apollo Studio (GraphOS)
@@ -45,10 +45,12 @@ docker run -p 4000:4000 \
     * Using Apollo Gateway: run and publish subgraphs on host `localhost` or `0.0.0.0`
     * Using Apollo Router (as a Docker container in WSL2 or MacOS): run subgraphs on host `0.0.0.0` and publish subgraphs on host `host.docker.internal`. This is to make sure router container can connect to subgraphs running on docker host
 
+## export the `APOLLO_KEY`
+`export APOLLO_KEY=service:BigW-POC:V89xsGoDG98gJtD7W91-Kg`
 
 ## Publish Products subgraph using Rover CLI
 ```
-rover subgraph publish Demo-re2ivc@current \
+rover subgraph publish BigW-POC@current \
   --schema ./subgraphs/products/schema.graphql \
   --name products-subgraph \
   --routing-url http://host.docker.internal:4002/
@@ -56,7 +58,7 @@ rover subgraph publish Demo-re2ivc@current \
 
 ## Publish Users subgraph using Rover CLI
 ```
-rover subgraph publish Demo-re2ivc@current \
+rover subgraph publish BigW-POC@current \
   --schema ./subgraphs/users/schema.graphql \
   --name users-subgraph \
   --routing-url http://host.docker.internal:4001/
