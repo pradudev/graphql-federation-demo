@@ -1,10 +1,11 @@
 import { ApolloServer } from '@apollo/server'
 import { startStandaloneServer } from '@apollo/server/standalone'
 import { buildSubgraphSchema } from '@apollo/subgraph'
-import { readFileSync } from "fs";
+import { readFileSync } from "node:fs";
 import path from 'node:path'
 import { getCurrentModulePath } from '../../utils.js';
 import { gql } from 'graphql-tag'
+// import { ApolloServerPluginCacheControl } from '@apollo/server/plugin/cacheControl';
 
 try {
   console.log(process.env.NODE_ENV);
@@ -13,15 +14,15 @@ try {
 
   const typeDefs = readFileSync(schemaPath, 'utf8');
 
-  const products = [
-    { id: "101", name: "Laptop", price: 999.99 },
-    { id: "102", name: "Smartphone", price: 499.99 },
-  ]
+  const getproducts = () => {
+    const data = readFileSync(path.join(getCurrentModulePath(import.meta.url), 'products.json'), 'utf8');
+    return JSON.parse(data);
+  }
 
   const resolvers = {
     Query: {
-      products: () => products,
-      product: (_, { id }) => products.find(product => product.id === id),
+      products: () => getproducts(),
+      product: (_, { id }) => getproducts().find(product => product.id === id),
     },
   };
 
@@ -29,13 +30,26 @@ try {
   const server = new ApolloServer({
     schema: schema,
     introspection: true,
+    // plugins: [
+    //   ApolloServerPluginCacheControl({
+    //     defaultMaxAge: 0,
+    //     calculateHttpHeaders: false,
+    //   }),
+    // ],
     // introspection: process.env.NODE_ENV !== 'production',
     // hideSchemaDetailsFromClientErrors: process.env.NODE_ENV === 'production',
     // includeStacktraceInErrorResponses: process.env.NODE_ENV !== 'production',
     //nodeEnv: 'production'
   });
 
-  startStandaloneServer(server, { listen: { host: '0.0.0.0', port: 4002 } }).then(({ url }) => {
+  startStandaloneServer(server, { 
+    listen: { host: '0.0.0.0', port: 4002 },
+    context: async ({ req, res }) => {
+      // add custom headers or context here
+      res.setHeader('Edge-Cache-Tag', 'products-subgraph');
+      return {};
+    }
+  }).then(({ url }) => {
     console.log(`🚀 Products SubGraph running at ${url}`);
   });
 } catch (error) {

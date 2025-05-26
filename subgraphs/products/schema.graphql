@@ -2,7 +2,7 @@ extend schema
   @link(url: "https://specs.apollo.dev/federation/v2.6", import: ["@key"])
 
 type Query {
-  products: [Product]
+  products: [Product]@cacheControl(maxAge: 25)
   product(id: ID!): Product
 }
 
@@ -12,3 +12,13 @@ type Product @key(fields: "id") {
   price: Float!
 }
 
+enum CacheControlScope {
+  PUBLIC
+  PRIVATE
+}
+
+directive @cacheControl(
+  maxAge: Int
+  scope: CacheControlScope
+  inheritMaxAge: Boolean
+) on FIELD_DEFINITION | OBJECT | INTERFACE | UNION

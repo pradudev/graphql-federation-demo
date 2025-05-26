@@ -14,6 +14,15 @@ include_subgraph_errors:
 persisted_queries:
   enabled: true
 
+# Enable entity caching globally
+preview_entity_cache:
+  enabled: true
+  subgraph:
+    all:
+      enabled: true
+
+
+
 # telemetry:
 #   instrumentation:
 #     spans:
@@ -24,3 +33,4 @@ persisted_queries:
 #     request:
 #       - propagate:
 #           matching: .*
+
