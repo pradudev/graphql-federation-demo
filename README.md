@@ -32,9 +32,12 @@ rover dev \
 docker run -p 4000:4000 \
   --env APOLLO_GRAPH_REF="BigW-POC@current" \
   --env APOLLO_KEY="service:BigW-POC:V89xsGoDG98gJtD7W91-Kg" \
+  --env APOLLO_ROUTER_LOG="warn" \
+  --env APOLLO_ROUTER_HOT_RELOAD="true" \
   --mount "type=bind,source=/Users/prado/personal/projects/graphql-federation-demo/router-config.yaml,target=/dist/config/router.yaml" \
+  --mount "type=bind,source=/Users/prado/personal/projects/graphql-federation-demo/rhai,target=/dist/config/rhai" \
   --rm \
-  ghcr.io/apollographql/router:v2.1.1
+  ghcr.io/apollographql/router:v2.2.1
 ```
 
 # Publish subgraphs to Apollo Studio (GraphOS)

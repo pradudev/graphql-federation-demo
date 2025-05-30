@@ -14,15 +14,15 @@ try {
 
   const typeDefs = readFileSync(schemaPath, 'utf8');
 
-  const getproducts = () => {
+  const getProducts = () => {
     const data = readFileSync(path.join(getCurrentModulePath(import.meta.url), 'products.json'), 'utf8');
     return JSON.parse(data);
   }
 
   const resolvers = {
     Query: {
-      products: () => getproducts(),
-      product: (_, { id }) => getproducts().find(product => product.id === id),
+      products: () => getProducts(),
+      product: (_, { id }) => getProducts().find(product => product.id === id),
     },
   };
 
@@ -46,7 +46,7 @@ try {
     listen: { host: '0.0.0.0', port: 4002 },
     context: async ({ req, res }) => {
       // add custom headers or context here
-      res.setHeader('Edge-Cache-Tag', 'products-subgraph');
+      res.setHeader('X-SUBGRAPHS', 'products-subgraph');
       return {};
     }
   }).then(({ url }) => {

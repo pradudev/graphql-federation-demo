@@ -21,6 +21,9 @@ preview_entity_cache:
     all:
       enabled: true
 
+rhai:
+  scripts: "/dist/config/rhai"
+  main: "main.rhai"
 
 
 # telemetry:
